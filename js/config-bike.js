@@ -19,7 +19,7 @@ var config = {
             location: {
               // longitude, lantitude
                 center: [-122.316768,47.612842],
-                zoom: 12,
+                zoom: 14,
                 pitch: 40.00,
                 bearing: 30.00
             },
@@ -39,7 +39,7 @@ var config = {
         {
             id: 'march-route',
             title: 'Prides in Seattle',
-            image: '',
+            image: 'https://storage.googleapis.com/afs-prod/media/media:5de9a7dded6a48ebbe1d3c7ec3583aaf/800.jpeg',
             description: 'Each year, Seattle Pride awards grants to charitable organizations that support the local LGBTQ+ community. In 2019, there are Trans Pride, Wildrose Pride, Queer/Bar Pride, Capital Hill Pride, Seattle Dyke March, Seattle Pride Parade.',
             location: {
                 center: [-122.322615,47.613533],
@@ -49,37 +49,37 @@ var config = {
             },
             onChapterEnter: [
                 {
-                    layer: 'phl-bike-network',
+                    layer: 'march-route',
                     opacity: 1
                 }
             ],
             onChapterExit: [
               {
-                  layer: 'phl-bike-network',
+                  layer: 'march-route',
                   opacity: 0
               }
             ]
         },
         {
-            id: 'indego',
-            title: 'Indego Bike Share',
-            image: '',
-            description: 'Indego has been operating in Philadelphia since 20XX. The system initally was focused on Center City, but has expanded service to neighboring areas to support equitable mobility options to the city\'s residents.',
+            id: 'lgbtq-friendly-church',
+            title: 'LGTBQ Friendly Church in Seattle',
+            image: 'https://static.seattletimes.com/wp-content/uploads/2020/01/01032020_methodist-pic_091309-1560x1040.jpg',
+            description: 'As a LGBTQ friendly city, there are many facilities that are welcome to LGBTQ people, not only the restaurant, bars, but also the churches.',
             location: {
-                center: [-75.16468, 39.94503],
-                zoom: 13.15,
+                center: [-122.294580, 47.633218],
+                zoom: 13.00,
                 pitch: 60.00,
                 bearing: -16.80
             },
             onChapterEnter: [
                 {
-                    layer: 'march-route',
+                    layer: 'lgbtq-friendly-church (1)',
                     opacity: 0.8
                 }
             ],
             onChapterExit: [
                 {
-                    layer: 'march-route',
+                    layer: 'lgbtq-friendly-church (1)',
                     opacity: 0
                 }
             ]
@@ -90,8 +90,8 @@ var config = {
             image: '',
             description: 'A short ride along the Schuylkill River Trail from the Art Museum, Belmont is a twisty, log-ridden rollercoaster of a trail network. It is easy to get turned around, the underbrush is at times impenetrable, and short steep sections come out of nowhere. In other words, it\'s really fun',
             location: {
-                center: [-75.20325, 39.99574],
-                zoom: 14.99,
+                center: [-122.316768,47.612842],
+                zoom: 17,
                 pitch: 44.00,
                 bearing: -40.00
             },
