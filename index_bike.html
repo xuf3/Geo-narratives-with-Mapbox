@@ -96,7 +96,7 @@
 
 <div id="map"></div>
 <div id="story"></div>
-<script src="js/config-bike.js"></script>
+<script src="js/config.js"></script>
 <script>
 var layerTypes = {
     'fill': ['fill-opacity'],
@@ -234,6 +234,8 @@ if (config.showMarkers) {
 // instantiate the scrollama
 var scroller = scrollama();
 
+
+
 map.on("load", function() {
     // setup the instance, pass callback functions
     scroller
@@ -252,12 +254,20 @@ map.on("load", function() {
         if (chapter.onChapterEnter.length > 0) {
             chapter.onChapterEnter.forEach(setLayerOpacity);
         }
+        if (chapter.addGeo.length > 0) {
+            map.addSource(chapter.addGeo[0].id, chapter.addGeo[0].source);
+            map.addLayer(chapter.addGeo[0].layer);
+            //chapter.addGeo.forEach(setLayerOpacity);
+        }
     })
     .onStepExit(response => {
         var chapter = config.chapters.find(chap => chap.id === response.element.id);
         response.element.classList.remove('active');
         if (chapter.onChapterExit.length > 0) {
             chapter.onChapterExit.forEach(setLayerOpacity);
+        }
+        if (chapter.removeGeo.length > 0) {
+            map.removeLayer(chapter.removeGeo[0].layer);
         }
     });
 });
