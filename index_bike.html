@@ -215,6 +215,8 @@ const transformRequest = (url) => {
     }
 }
 
+
+
 var map = new mapboxgl.Map({
     container: 'map',
     style: config.style,
@@ -234,8 +236,6 @@ if (config.showMarkers) {
 // instantiate the scrollama
 var scroller = scrollama();
 
-
-
 map.on("load", function() {
     // setup the instance, pass callback functions
     scroller
@@ -248,8 +248,13 @@ map.on("load", function() {
         var chapter = config.chapters.find(chap => chap.id === response.element.id);
         response.element.classList.add('active');
         map.flyTo(chapter.location);
+        //map.setStyle(config.style);
         if (config.showMarkers) {
             marker.setLngLat(chapter.location.center);
+        }
+        if (chapter.addRaster.length > 0) {
+           map.addSource(chapter.addRaster[0].id, chapter.addRaster[0].source);
+            map.addLayer(chapter.addRaster[0].layer);
         }
         if (chapter.onChapterEnter.length > 0) {
             chapter.onChapterEnter.forEach(setLayerOpacity);
@@ -268,6 +273,11 @@ map.on("load", function() {
         }
         if (chapter.removeGeo.length > 0) {
             map.removeLayer(chapter.removeGeo[0].layer);
+            //map.removeLayer(chapter.removeGeo[0].id);
+        }
+        if (chapter.removeRaster.length > 0) {
+          map.removeLayer(chapter.removeRaster[0].layer);
+            //map.removeLayer(chapter.removeGeo[0].layer);
         }
     });
 });

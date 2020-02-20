@@ -47,10 +47,32 @@ var config = {
                 {
                     layer: 'maine',
                 }
-            ]
+            ],
+            addRaster: [
+              {
+                id : 'raster-tiles',
+                source: {
+                    'type': 'raster',
+                    'tiles': [
+                      'https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg'
+                    ],
+                  },
+                layer: {'id': 'simple-tiles',
+                'type': 'raster',
+                'source': 'raster-tiles',
+                'opacity' : 0.3,
+              }
+                }
+          ],
+          removeRaster: [
+              {
+                  layer: 'raster-tiles',
+              }
+          ]
         },
         {
             id: 'march-route',
+            style: 'mapbox://styles/xuf3/ck53f3ukg0sjy1csd5vzb3niq',
             title: 'Prides in Seattle',
             image: 'https://storage.googleapis.com/afs-prod/media/media:5de9a7dded6a48ebbe1d3c7ec3583aaf/800.jpeg',
             description: 'Each year, Seattle Pride awards grants to charitable organizations that support the local LGBTQ+ community. In 2019, there are Trans Pride, Wildrose Pride, Queer/Bar Pride, Capital Hill Pride, Seattle Dyke March, Seattle Pride Parade.',
