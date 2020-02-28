@@ -72,6 +72,10 @@ a, a:hover, a:visited {
     width: 100%;
 }
 
+.step iframe{
+  width: 100%;
+}
+
 @media (max-width: 750px) {
     #features {
         width: 90vw;
