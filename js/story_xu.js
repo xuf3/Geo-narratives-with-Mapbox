@@ -1,23 +1,21 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoieHVmMyIsImEiOiJjazUzZTQ0bWEwN3BjM2xtYzAxd2NvcXJ3In0.Fyg85XmzmWQs_nLgf7DXdg';
-//'light-v10','dark-v10'.'outdoors-v11','satellite-v9'
-var map_style = 'streets-v11';
-
-var map = new mapboxgl.Map({
-  container: 'map',
-  zoom: 9,
-  center: [137.9150899566626, 36.25956997955441],
-  style: 'mapbox://styles/mapbox/' + map_style
-});
-
 var chapters = [
   {
     id: 'crosswalk',
     theme: 'light',
     position: 'lefty',
     title: 'Rainbow Crosswalks in Seattle',
-    image: 'https://cdn.vox-cdn.com/thumbor/j0qWyhnj8qrv1uuhosUfcnhqpBQ=/0x0:500x375/920x613/filters:focal(0x0:500x375)/cdn.vox-cdn.com/uploads/chorus_image/image/46614402/18896843740_4b9955586e_z-3.0.0.jpg',
+    image: '',
     video: 'https://www.youtube.com/embed/TrGI9Yki-24',
-    description: 'In honor of LGBTQ pride, Capitol Hill will be sporting some brand-new rainbow-colored crosswalks. The pedestrian crossings, located east of Broadway on 10th and 11th Avenues, are expected to last for three to five years. The costs, roughly $6,000 each, are being covered by Capitol Hill developers. Mayor Ed Murray unveiled the crosswalks on Tuesday, remarking that "it says something about this neighborhood and it also says something about Seattle. This is a city of very diverse neighborhoods throughout with different character.'
+    description: 'In honor of LGBTQ pride, Capitol Hill will be sporting some brand-new rainbow-colored crosswalks. The pedestrian crossings, located east of Broadway on 10th and 11th Avenues, are expected to last for three to five years. The costs, roughly $6,000 each, are being covered by Capitol Hill developers. Mayor Ed Murray unveiled the crosswalks on Tuesday, remarking that "it says something about this neighborhood and it also says something about Seattle. This is a city of very diverse neighborhoods throughout with different character.',
+    changestyle: 'dark-v10',
+    addlayer: [
+      {
+        id : 'maine',
+      source: {'type': 'geojson','data': {'type': 'Feature','geometry': {'type': 'Polygon',
+      'coordinates': [[[-122.320964, 47.614164],[-122.320649, 47.614182],[-122.320617, 47.613981],[-122.320974, 47.613974]]]}}},
+      layer: {'id': 'maine','type': 'fill','source': 'maine','layout': {},'paint': {'fill-color': '#088','fill-opacity': 0.8}},
+      }
+    ]
   },
   {
     id: 'march',
@@ -59,7 +57,7 @@ chapters.forEach(function(content,index){
   if(content.video){
     var video = document.createElement('iframe');
     video.src = content.video;
-    video.height = "400";
+    video.height = "300";
     chapter.appendChild(video);
   }
 
