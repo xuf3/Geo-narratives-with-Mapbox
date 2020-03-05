@@ -35,13 +35,13 @@ var map = new mapboxgl.Map({
   zoom: 14,
   pitch: 60,
   bearing: 40,
-  center: [137.9150899566626, 36.25956997955441],
+  center: [-122.319,47.614],
   style: 'mapbox://styles/mapbox/' + map_style
 });
 
-function addlayer(feature){
-  map.addSource(feature.addGeo[0].id, feature.addGeo[0].source);
-  map.addLayer(cfeature.addGeo[0].layer);
+function addlayer(layer){
+  map.addSource(layer.id, layer.source);
+  map.addLayer(layer.layer);
 }
 
 var scroller = scrollama();
@@ -58,16 +58,11 @@ map.on("load", function() {
         var chapter = chapters.find(chap => chap.id === response.element.id);
         response.element.classList.add('active');
         map.flyTo(chapter.location);
-        if(chapter.changestyle){
+        if(chapter.style){
           map.setStyle('mapbox://styles/mapbox/' + chapter.changestyle);
         }
-        if (chapter.onChapterEnter.length > 0) {
-            chapter.onChapterEnter.forEach(setLayerOpacity);
-        }
-        if (chapter.addlayer > 0) {
-            map.addSource(chapter.addGeo[0].id, chapter.addGeo[0].source);
-            map.addLayer(chapter.addGeo[0].layer);
-            //chapter.addGeo.forEach(setLayerOpacity);
+        if (chapter.layer.length > 0) {
+            chapter.layer.forEach(addlayer);
         }
     })
     .onStepExit(response => {

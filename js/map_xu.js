@@ -37,9 +37,8 @@ map.on("load", function() {
         if (chapter.onChapterEnter.length > 0) {
             chapter.onChapterEnter.forEach(setLayerOpacity);
         }
-        if (chapter.addGeo.length > 0) {
-            map.addSource(chapter.addGeo[0].id, chapter.addGeo[0].source);
-            map.addLayer(chapter.addGeo[0].layer);
+        if (chapter.addlayer.length > 0) {
+            chapter.addlayer.forEach(addlayer);
             //chapter.addGeo.forEach(setLayerOpacity);
         }
     })
