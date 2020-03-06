@@ -31,8 +31,8 @@ map.on("load", function() {
         if(chapter.style){
           map.setStyle('mapbox://styles/mapbox/' + chapter.changestyle);
         }
-        if (chapter.show.length > 0) {
-            chapter.show.forEach(addlayer);
+        if (chapter.show > 0) {
+            chapter.show.forEach(showlayer);
         }
     })
     .onStepExit(response => {
