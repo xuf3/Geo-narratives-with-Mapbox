@@ -1,8 +1,13 @@
 
-function addlayer(layer){
+function add(layer){
+  console.log(layer);
   map.addSource(layer.id, layer.source);
   map.addLayer(layer.layer);
 }
+
+map.on("load", function() {
+  maplayers.forEach(add);
+})
 
 function removelayer(layer){
   //map.setPaintProperty(layer.id, map.getLayer(layer.id).type, 0);

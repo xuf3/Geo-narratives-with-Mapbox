@@ -67,6 +67,16 @@ var stories = [
     description: 'As a LGBTQ friendly city, there are many facilities that are welcome to LGBTQ people, not only the restaurant, bars, but also the churches.'
   }
 ]
+
+
+var maplayers = [
+  {
+    id : 'maine',
+    source: {'type': 'geojson','data': {'type': 'Feature','geometry': {'type': 'Polygon',
+    'coordinates': [[[-122.320964, 47.614164],[-122.320649, 47.614182],[-122.320617, 47.613981],[-122.320974, 47.613974]]]}}},
+    layer: {'id': 'maine','type': 'fill','source': 'maine','layout': {},'paint': {'fill-color': '#088','fill-opacity': 0.8}},
+  }
+]
 //map setting for each section
 var chapters = [
   {
@@ -77,21 +87,7 @@ var chapters = [
         zoom: 17,
         pitch: 40.00,
         bearing: 30.00
-    },
-    //style: '',
-    show: [
-      {
-        id : 'maine',
-        source: {'type': 'geojson','data': {'type': 'Feature','geometry': {'type': 'Polygon',
-        'coordinates': [[[-122.320964, 47.614164],[-122.320649, 47.614182],[-122.320617, 47.613981],[-122.320974, 47.613974]]]}}},
-        layer: {'id': 'maine','type': 'fill','source': 'maine','layout': {},'paint': {'fill-color': '#088','fill-opacity': 0.8}},
-      }
-    ],
-    hide: [
-      {
-        id: 'maine'
-      }
-    ]
+    }
   },
   {
     id: 'march',
