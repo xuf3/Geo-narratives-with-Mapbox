@@ -7,13 +7,24 @@ var chapters = [
     image: '',
     video: 'https://www.youtube.com/embed/TrGI9Yki-24',
     description: 'In honor of LGBTQ pride, Capitol Hill will be sporting some brand-new rainbow-colored crosswalks. The pedestrian crossings, located east of Broadway on 10th and 11th Avenues, are expected to last for three to five years. The costs, roughly $6,000 each, are being covered by Capitol Hill developers. Mayor Ed Murray unveiled the crosswalks on Tuesday, remarking that "it says something about this neighborhood and it also says something about Seattle. This is a city of very diverse neighborhoods throughout with different character.',
-    changestyle: 'dark-v10',
-    addlayer: [
+    location: {
+      // longitude, lantitude
+        center: [-122.319,47.614],
+        zoom: 17,
+        pitch: 40.00,
+        bearing: 30.00
+    },
+    //changestyle: 'dark-v10',
+    show:[
       {
-        id : 'maine',
-      source: {'type': 'geojson','data': {'type': 'Feature','geometry': {'type': 'Polygon',
-      'coordinates': [[[-122.320964, 47.614164],[-122.320649, 47.614182],[-122.320617, 47.613981],[-122.320974, 47.613974]]]}}},
-      layer: {'id': 'maine','type': 'fill','source': 'maine','layout': {},'paint': {'fill-color': '#088','fill-opacity': 0.8}},
+        layer: 'maine',
+        opacity: 0.8,
+      }
+    ],
+    hide:[
+      {
+        layer: 'maine',
+        opacity: 0,
       }
     ]
   },
@@ -23,7 +34,25 @@ var chapters = [
     title: 'Prides in Seattle',
     position: 'righty',
     image: 'https://storage.googleapis.com/afs-prod/media/media:5de9a7dded6a48ebbe1d3c7ec3583aaf/800.jpeg',
-    description: 'Each year, Seattle Pride awards grants to charitable organizations that support the local LGBTQ+ community. In 2019, there are Trans Pride, Wildrose Pride, Queer/Bar Pride, Capital Hill Pride, Seattle Dyke March, Seattle Pride Parade.'
+    description: 'Each year, Seattle Pride awards grants to charitable organizations that support the local LGBTQ+ community. In 2019, there are Trans Pride, Wildrose Pride, Queer/Bar Pride, Capital Hill Pride, Seattle Dyke March, Seattle Pride Parade.',
+    location: {
+        center: [-122.322615,47.613533],
+        zoom: 14,
+        pitch: 20,
+        bearing: 20.00
+    },
+    show:[
+      {
+        layer: 'seattle',
+        opacity: 0.8,
+      }
+    ],
+    hide:[
+      {
+        layer: 'seattle',
+        opacity: 0,
+      }
+    ]
   },
   {
     id: 'church',
@@ -35,6 +64,7 @@ var chapters = [
   }
 ]
 
+//set storyboard
 chapters.forEach(function(content,index){
   var menu = document.getElementById("features")
   var chapter = document.createElement('div');

@@ -24,30 +24,48 @@
 
 <!-- adding the story feature for each page -->
 <script src="js/story_xu.js"></script>
+<script src="js/layers_xu.js"></script>
 <script>
 
 mapboxgl.accessToken = 'pk.eyJ1IjoieHVmMyIsImEiOiJjazUzZTQ0bWEwN3BjM2xtYzAxd2NvcXJ3In0.Fyg85XmzmWQs_nLgf7DXdg';
-//'light-v10','dark-v10'.'outdoors-v11','satellite-v9','streets-v11'
-var map_style = 'satellite-v9';
-
-var map = new mapboxgl.Map({
-  container: 'map',
-  zoom: 14,
-  pitch: 60,
-  bearing: 40,
-  center: [137.9150899566626, 36.25956997955441],
-  style: 'mapbox://styles/mapbox/' + map_style
-});
-
-function addlayer(feature){
-  map.addSource(feature.addGeo[0].id, feature.addGeo[0].source);
-  map.addLayer(cfeature.addGeo[0].layer);
-}
 
 var scroller = scrollama();
 
+var mapStyle = 'light-v10'
+
+//initialize the map, location, style
+var map = new mapboxgl.Map({
+  container: 'map',
+  center: [-122.319,47.614],
+  zoom: 17,
+  pitch: 40.00,
+  bearing: 30.00,
+  //'light-v10','dark-v10'.'outdoors-v11','satellite-v9','streets-v11'
+  style: 'mapbox://styles/mapbox/' + mapStyle,
+});
+
+function getLayerPaintType(layer) {
+    var layerType = map.getLayer(layer).type;
+    return layerTypes[layerType];
+}
+
+//show or hide the layer
+function setLayerOpacity(layer) {
+    var paintProps = getLayerPaintType(layer.layer);
+    paintProps.forEach(function(prop) {
+        map.setPaintProperty(layer.layer, prop, layer.opacity);
+    });
+}
+
+//add all layers to the map will 0 opacity
+
+
 map.on("load", function() {
     // setup the instance, pass callback functions
+    layers.forEach(function(feature){
+      map.addSource(feature.id,feature.source);
+      map.addLayer(feature.layer);
+    });
     scroller
     .setup({
         step: '.step',
@@ -56,33 +74,24 @@ map.on("load", function() {
     })
     .onStepEnter(response => {
         var chapter = chapters.find(chap => chap.id === response.element.id);
+        //active chapter's storyboard
         response.element.classList.add('active');
+        //change the center of location
         map.flyTo(chapter.location);
+        //change the basemap
         if(chapter.changestyle){
           map.setStyle('mapbox://styles/mapbox/' + chapter.changestyle);
         }
-        if (chapter.onChapterEnter.length > 0) {
-            chapter.onChapterEnter.forEach(setLayerOpacity);
-        }
-        if (chapter.addlayer > 0) {
-            map.addSource(chapter.addGeo[0].id, chapter.addGeo[0].source);
-            map.addLayer(chapter.addGeo[0].layer);
-            //chapter.addGeo.forEach(setLayerOpacity);
+        //show the layer
+        if (chapter.show.length > 0) {
+            chapter.show.forEach(setLayerOpacity);
         }
     })
     .onStepExit(response => {
         var chapter = chapters.find(chap => chap.id === response.element.id);
         response.element.classList.remove('active');
-        if (chapter.onChapterExit.length > 0) {
-            chapter.onChapterExit.forEach(setLayerOpacity);
-        }
-        if (chapter.removeGeo.length > 0) {
-            map.removeLayer(chapter.removeGeo[0].layer);
-            //map.removeLayer(chapter.removeGeo[0].id);
-        }
-        if (chapter.removeRaster.length > 0) {
-          map.removeLayer(chapter.removeRaster[0].layer);
-            //map.removeLayer(chapter.removeGeo[0].layer);
+        if (chapter.hide.length > 0) {
+            chapter.hide.forEach(setLayerOpacity);
         }
     });
 });
