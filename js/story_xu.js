@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var chapters = [
   {
     id: 'crosswalk',
@@ -66,40 +67,43 @@ var chapters = [
 
 //set storyboard
 chapters.forEach(function(content,index){
+=======
+stories.forEach(function(content,index){
+>>>>>>> f3aed2a2da7bdcb460eac118a9ca245cef940c36
   var menu = document.getElementById("features")
-  var chapter = document.createElement('div');
-  chapter.setAttribute("id",content.id);
-  chapter.setAttribute("class",content.position + " " + content.theme + " step");
-  chapter.setAttribute("data-scrollama-index", index);
+  var story = document.createElement('div');
+  story.setAttribute("id",content.id);
+  story.setAttribute("class",content.position + " " + content.theme + " step");
+  story.setAttribute("data-scrollama-index", index);
 
   if(content.title){
     var title = document.createElement('h3');
     title.innerHTML = content.title;
-    chapter.appendChild(title);
+    story.appendChild(title);
   }
 
   if(content.image){
     var image = document.createElement('img');
     image.src = content.image;
-    chapter.appendChild(image);
+    story.appendChild(image);
   }
 
   if(content.video){
     var video = document.createElement('iframe');
     video.src = content.video;
     video.height = "300";
-    chapter.appendChild(video);
+    story.appendChild(video);
   }
 
   if(content.description){
     var description = document.createElement('p');
     description.innerHTML = content.description;
-    chapter.appendChild(description);
+    story.appendChild(description);
   }
 
   if(index === 0){
-    chapter.className += " " + "active";
+    story.className += " " + "active";
   }
 
-  menu.appendChild(chapter);
+  menu.appendChild(story);
 })
